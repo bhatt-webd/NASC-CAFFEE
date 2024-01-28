@@ -1,82 +1,63 @@
-let box=document.querySelectorAll(".box");
-let reset=document.querySelector(".btn");
-let msg=document.querySelector(".msg");
-let msgtxt=document.querySelector(".msgtxt");
-
-let btnnew=document.querySelector(".btnnew");
-let turnO = true;
-const winpatern = [
-    [0,1,2],
-    [0,3,6],
-    [0,4,8],
-    [1,4,7],
-    [2,5,8],
-    [3,4,5],
-    [6,7,8],
-    [2,4,6],
-];
-////////////////// USER INPUTS //////////////////....
-box.forEach((b) => {
-    b.addEventListener("click",function(e) {
-        if (turnO) {
-            b.innerText = "O";
-            turnO = false;
-        }
-        else {
-            b.innerText = "X";
-            turnO=true;
-        }
-        b.disabled=true;
-        chkwin();
-    });
-});
-////////RESET BUTTON................
-reset.addEventListener("click",function(e) {
-    box.forEach((b) => {
-        b.innerText = " "
-        b.disabled = false;
-        msg.classList.add("hid");
-        
-    })
-})
-btnnew.addEventListener("click",function(e) {
-    box.forEach((b) => {
-        b.innerText = " "
-        b.disabled = false;
-        msgtxt.innerText="";
-        msg.classList.add("hid");
-        
-       
-        
-    })
-})
-/////////////WINNER CHEKING................
-const showwin =(winners)=>{
-    msgtxt.innerText = "Winner of Game is "+winners;
-}
-const disbtn=() => {
-for(let boxes of box){
-    boxes.disabled = true;
-}
-}
-const chkwin = () => {
-    for(let ptn of winpatern){
-        let pos1=box[ptn[0]].innerText;
-        let pos2=box[ptn[1]].innerText;
-        let pos3=box[ptn[2]].innerText;
-
-        if(pos1 != "" && pos2 != "" && pos3 != ""){
-
-            if(pos1 === pos2 && pos2 === pos3){
-                msg.classList.remove("hid");
-               disbtn();
-                 showwin(pos1);
-        
-        }
-        
-
+var lbtn1 = document.querySelector(".lbtn1");
+var lbtn2 = document.querySelector(".lbtn2");
+var lbtn4 = document.querySelector(".lbtn4");
+var lbtn5 = document.querySelector(".lbtn5");
+var tmp=1;
+lbtn1.addEventListener("click",function(){
+    if(tmp==1){
+    lbtn2.style.opacity = "1";
+    lbtn4.style.opacity = "1";
+    lbtn5.style.opacity = "1";
+    tmp=0;
     }
+    else{
+        lbtn2.style.opacity = "0";
+        lbtn4.style.opacity = "0";
+        lbtn5.style.opacity = "0";
+        tmp=1;
+    }
+},1200);
 
-  }
+var tl = gsap.timeline({scrollTrigger:{
+    trigger:".page-two",
+    start:"0% 90%",
+    end:"50% 70%",
+    scrub:true,
+    
+}})
 
-}
+tl.to(".can",{
+    top:"150%",
+    scale:"0.9",
+    rotate:"360",
+})
+
+var t2 = gsap.timeline({scrollTrigger:{
+    trigger:".page-three",
+    start:"0% 90%",
+    end:"50% 70%",
+    scrub:true,
+    
+}})
+
+t2.to(".can",{
+    top:"370%",
+    scale:"1",
+    rotate:"360",
+})
+
+var t3 = gsap.timeline({scrollTrigger:{
+    trigger:".page-three",
+    start:"60% 100%",
+    end:"45% 50%",
+    scrub:true,
+   // markers:true,
+}})
+
+t3.from(".left,.right,.center-box",{
+    opacity:"0",
+    duration:"3",
+    scale:"0",
+ 
+})
+
